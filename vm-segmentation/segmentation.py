@@ -151,6 +151,9 @@ for vstr in addrList:
         if (vaddr >= (asize / 2)):
             # seg 1
             #  [base1+len1]  [negative offset]
+            # asize = segment's maximum size
+            # if we use base1 - asize as the begin of the stack, we can treat it as a heap
+            # and (base1 - asize) + vaddr is like add a VA to a heap mem base
             paddr = nbase1 + (vaddr - asize)
             if paddr < base1:
                 print('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG1)' % (i, vaddr, vaddr))
